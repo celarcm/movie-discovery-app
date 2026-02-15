@@ -1,4 +1,6 @@
-export const getPopularMovies = async (page: number = 1) => {
+import { TMDBResponse } from "@/types/movie";
+
+export const getPopularMovies = async (page: number = 1): Promise<TMDBResponse> => {
     const API_KEY = process.env.TMDB_API_KEY;
     const BASE_URL = 'https://api.themoviedb.org/3';
 
