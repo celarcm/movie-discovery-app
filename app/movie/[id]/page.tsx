@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getMovieDetails, getImageUrl } from "@/lib/tmdb";
 
@@ -38,6 +39,25 @@ export default async function MovieDetailsPage({ params }: MoviePageProps) {
                         </div>
 
                         <div className="flex-1">
+                            <Link
+                                href="/"
+                                className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-4 transition-colors"
+                            >
+                                <svg
+                                    className="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                                    />
+                                </svg>
+                                Back to movies
+                            </Link>
 
                             <h1 className="text-4xl sm:text-5xl font-bold mb-2">{movie.title}</h1>
 
