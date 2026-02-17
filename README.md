@@ -1,5 +1,31 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+**Author:** Matej Celarc
+
+---
+
+## Requirements Not Implemented
+
+- All requirements have been implemented.
+
+---
+
+## Issues Faced During Implementation
+
+- **Images:** Had to update `next.config.ts` to add `remotePatterns` so that remote TMDB image URLs are allowed by Next.js Image component.
+- **Missing posters:** Some movies do not have a poster image. A fallback (e.g. placeholder or text) was added for those cases.
+
+---
+
+## Possible Improvements (With More Time)
+
+- **Auto pagination:** Load more results automatically when the user scrolls to the bottom of the list.
+- **Loading skeletons:** Add skeleton loaders for a better loading experience.
+- **Hover details:** Show extra data when hovering over a movie card (e.g. title, user rating, genre).
+- **Genre filtering and sorting:** Filter movies by genre and add sorting options.
+
+---
+
 ## Getting Started
 
 ### 1. Clone the Repository
