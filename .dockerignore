@@ -1,0 +1,43 @@
+# Dependencies
+node_modules
+.pnpm-store
+.npm
+.yarn
+bun.lockb
+
+# Build output
+.next
+out
+dist
+build
+
+# Git
+.git
+.gitignore
+
+# IDE and OS
+.vscode
+.idea
+*.swp
+.DS_Store
+Thumbs.db
+
+# Env files (pass at runtime)
+.env
+.env.*
+!.env.example
+
+# Debug and test
+*.log
+npm-debug.log*
+.coverage
+.nyc_output
+__tests__
+*.test.*
+*.spec.*
+
+# Misc
+README.md
+Dockerfile
+.dockerignore
+docker-compose*.yml
