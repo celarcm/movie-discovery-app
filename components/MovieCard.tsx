@@ -8,7 +8,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
 
     return (
         <Link href={`/movie/${movie.id}`}>
-            <div key={movie.id} className="h-100 transition-transform duration-300 hover:scale-105">
+            <div key={movie.id} className="h-full transition-transform duration-300 hover:scale-105">
                 {movie.poster_path ? (
                     <Image className="rounded-md" src={imageUrl} alt={movie.title} width={500} height={500} />
                 ) : (
