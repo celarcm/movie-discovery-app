@@ -26,7 +26,12 @@ export default async function Homepage({ searchParams }: HomePageProps) {
 
       <main className="max-w-[1920px] mx-auto flex flex-col">
         <h1 className="text-2xl font-bold py-4 w-full self-start">{searchQuery ? `Search Results for "${searchQuery}"` : "Popular Movies"}</h1>
-        <MovieGrid movies={movies.results} searchQuery={searchQuery} />
+        <MovieGrid
+          initialMovies={movies.results}
+          initialPage={movies.page}
+          totalPages={movies.total_pages}
+          searchQuery={searchQuery}
+        />
       </main>
     </div>
   );
