@@ -9,6 +9,8 @@ interface MovieGridProps {
     initialPage: number;
     totalPages: number;
     searchQuery?: string;
+    genre?: string;
+    sortBy?: string;
 }
 
 export default function MovieGrid({
@@ -16,6 +18,8 @@ export default function MovieGrid({
     initialPage,
     totalPages,
     searchQuery,
+    genre,
+    sortBy,
 }: MovieGridProps) {
     const [movies, setMovies] = useState<Movie[]>(initialMovies);
     const [page, setPage] = useState(initialPage);
@@ -36,6 +40,8 @@ export default function MovieGrid({
         const nextPage = page + 1;
         const params = new URLSearchParams({ page: String(nextPage) });
         if (searchQuery) params.set("query", searchQuery);
+        if (genre) params.set("genre", genre);
+        if (sortBy) params.set("sort_by", sortBy);
 
         try {
             const res = await fetch(`/api/movies?${params}`);
@@ -53,7 +59,7 @@ export default function MovieGrid({
         } finally {
             setLoading(false);
         }
-    }, [loading, hasMore, page, searchQuery]);
+    }, [loading, hasMore, page, searchQuery, genre, sortBy]);
 
     useEffect(() => {
         const sentinel = sentinelRef.current;

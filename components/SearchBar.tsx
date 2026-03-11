@@ -12,12 +12,16 @@ export default function SearchBar() {
         e.preventDefault()
 
         const trimmedQuery = searchQuery.trim();
+        const next = new URLSearchParams(searchParams.toString());
 
         if (trimmedQuery) {
-            router.push(`?query=${encodeURIComponent(searchQuery.trim())}`)
+            next.set('query', trimmedQuery);
         } else {
-            router.push('/')
+            next.delete('query');
         }
+
+        const qs = next.toString();
+        router.push(qs ? `?${qs}` : '/');
     }
 
     return (

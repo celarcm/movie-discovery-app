@@ -1,4 +1,4 @@
-import { TMDBResponse, MovieDetails } from "@/types/movie";
+import { TMDBResponse, MovieDetails, Genre } from "@/types/movie";
 
 const API_KEY = process.env.TMDB_API_KEY;
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -34,16 +34,47 @@ export const getImageUrl = (path: string | null, size: string = "w500"): string 
     return `${IMAGE_BASE_URL}/${size}${path}`;
 };
 
-export const getPopularMovies = async (page: number = 1): Promise<TMDBResponse> => {
+export const getGenres = async (): Promise<Genre[]> => {
     const response = await fetch(
-        `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`,
+        `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`,
+        { next: { revalidate: 86400 } },
     );
 
     if (!response.ok) {
-        throw new Error("Failed to fetch popular movies");
+        throw new Error("Failed to fetch genres");
+    }
+
+    const data = await response.json();
+    return data.genres;
+};
+
+export const discoverMovies = async (options: {
+    page?: number;
+    genreId?: string;
+    sortBy?: string;
+} = {}): Promise<TMDBResponse> => {
+    const { page = 1, genreId, sortBy = "popularity.desc" } = options;
+    const params = new URLSearchParams({
+        api_key: API_KEY!,
+        page: String(page),
+        sort_by: sortBy,
+    });
+    if (genreId) params.set("with_genres", genreId);
+    if (sortBy === "vote_average.desc") {
+        params.set("vote_count.gte", "200");
+    }
+
+    const response = await fetch(`${BASE_URL}/discover/movie?${params}`);
+
+    if (!response.ok) {
+        throw new Error("Failed to discover movies");
     }
 
     return response.json();
+};
+
+export const getPopularMovies = async (page: number = 1): Promise<TMDBResponse> => {
+    return discoverMovies({ page });
 };
 
 export const searchMovies = async (query: string, page: number = 1): Promise<TMDBResponse> => {
